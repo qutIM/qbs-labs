@@ -26,9 +26,9 @@ Probe {
         if (maxVersion !== undefined)
             args.push(name + ' <= ' + maxVersion);
         if (p.exec(executable, args.concat([ '--cflags' ])) === 0) {
-            cflags = p.readAll().split(/\s/);
+            cflags = p.readAll().trim().split(/\s/);
             if (p.exec(executable, args.concat([ '--libs' ])) === 0) {
-                libs = p.readAll().split(/\s/);
+                libs = p.readAll().trim().split(/\s/);
                 found = true;
                 return;
             }

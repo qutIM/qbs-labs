@@ -7,7 +7,7 @@ Module {
     Probes.PkgConfigProbe {
         id: probe
         name: "qca2"
-        required: true
+//        required: true
     }
     cpp.cFlags: probe.cflags
     cpp.cxxFlags: probe.cflags
