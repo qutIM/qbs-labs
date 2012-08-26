@@ -1,0 +1,11 @@
+import qbs.base 1.0
+
+Project {
+    moduleSearchPaths: "modules"
+    CppApplication {
+        name: "labs"
+        files: "main.cpp"
+        Depends { name: "qca" }
+        Depends { name: "qt.core" }
+    }
+}
