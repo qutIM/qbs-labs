@@ -10,4 +10,5 @@ Module {
 
     cpp.frameworks: "qca"
     cpp.frameworkPaths: "/usr/local/lib"
+    cpp.includePaths: "/usr/local/lib/qca.framework/Headers"
 }

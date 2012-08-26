@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include </usr/local/lib/qca.framework/Headers/QtCrypto>
+#include <QtCrypto>
 
 int main(int argc, char **argv)
 {

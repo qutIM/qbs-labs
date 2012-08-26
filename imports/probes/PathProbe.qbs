@@ -16,11 +16,11 @@ Probe {
     property string filePath
 
     // Overrides
-    property var convertName: function(name) {
+    function convertName(name) {
         return name;
     }
-    property var checkPath: function(path, name) {
-        var filePath = FileInfo.joinPaths(_paths[j], _suffixes[k], name);
+    function checkPath(path, name) {
+        var filePath = FileInfo.joinPaths(path, name);
         if (File.exists(filePath)) {
             return {
                 path: path,
