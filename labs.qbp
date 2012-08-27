@@ -5,7 +5,7 @@ Project {
     CppApplication {
         name: "labs"
         files: "main.cpp"
-//        Depends { name: "zlib" }
+        Depends { name: "zlib" }
         Depends { name: "qca" }
         Depends { name: "qt.core" }
     }

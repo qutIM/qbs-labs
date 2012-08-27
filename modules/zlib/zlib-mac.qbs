@@ -2,6 +2,7 @@ import qbs.base 1.0
 import "../../imports/probes" as Probes
 
 Module {
+    condition: qbs.targetOS === 'mac'
     Depends { name: "cpp" }
     Probes.LibraryProbe {
         id: libraryProbe

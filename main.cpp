@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QtCrypto>
+#include "zlib.h"
 
 int main(int argc, char **argv)
 {
