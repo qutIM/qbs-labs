@@ -5,7 +5,6 @@ Module {
     property string pkgConfigName
     property var libraryNames
     property var includeNames
-
     Depends { name: "cpp" }
 
     Probes.PkgConfigProbe {
@@ -26,15 +25,17 @@ Module {
         condition: !pkgConfigProbe.found
         names: includeNames
     }
-
-    cpp.cFlags: {
+    
+    condition: { 
         if(!pkgConfigProbe.found && !libraryProbe.found) {
+            // FIXME: Add check for required library
             throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
-            return undefined;
         }
-        else   
-           return pkgConfigProbe.cflags
+        else
+            return true;
     }
+
+    cpp.cFlags: pkgConfigProbe.cflags
     cpp.cxxFlags: pkgConfigProbe.cflags
     cpp.objcFlags: pkgConfigProbe.cflags
     cpp.linkerFlags: pkgConfigProbe.libs
