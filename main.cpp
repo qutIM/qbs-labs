@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <QtCrypto>
-#include "zlib.h"
+#include <zlib.h>
+#include <libotr/auth.h>
 
 int main(int argc, char **argv)
 {
