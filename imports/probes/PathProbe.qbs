@@ -17,10 +17,10 @@ Probe {
 
     // Overrides
     function convertName(name) {
-        return name;
+       return name;
     }
-    function checkPath(path, name) {
-        var filePath = FileInfo.joinPaths(path, name);
+    function _checkPath(filePath) {
+//        var filePath = FileInfo.joinPaths(path, name);
         if (File.exists(filePath)) {
             return {
                 path: path,
@@ -48,9 +48,12 @@ Probe {
             var name = convertName(_names[i]);
             for (var j = 0; j < _paths.length; ++j) {
                 for (var k = 0; k < _suffixes.length; ++k) {
-                    var result = checkPath(FileInfo.joinPaths(_paths[j], _suffixes[k]), name);
+                    var _paths2 = FileInfo.joinPaths(_paths[j], _suffixes[k]);
+                    var __paths2 = FileInfo.joinPaths(_paths2, name);
+                    var result = _checkPath(__paths2);
                     if (result !== undefined) {
                         found = true;
+
                         path = result.path;
                         filePath = result.filePath;
                         return;

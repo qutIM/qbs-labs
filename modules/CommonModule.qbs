@@ -27,7 +27,14 @@ Module {
         names: includeNames
     }
 
-    cpp.cFlags: pkgConfigProbe.cflags
+    cpp.cFlags: {
+        if(!pkgConfigProbe.found && !libraryProbe.found) {
+            throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
+            return undefined;
+        }
+        else   
+           return pkgConfigProbe.cflags
+    }
     cpp.cxxFlags: pkgConfigProbe.cflags
     cpp.objcFlags: pkgConfigProbe.cflags
     cpp.linkerFlags: pkgConfigProbe.libs
