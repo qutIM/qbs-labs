@@ -28,7 +28,7 @@ Module {
     
     condition: { 
         print(pkgConfigProbe.found, libraryProbe.found, includeProbe.found);
-        if(!pkgConfigProbe.found && !libraryProbe.found) {
+        if(!pkgConfigProbe.found && !(libraryProbe.found && includeProbe.found)) {
             // FIXME: Add check for required library
             throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
         }
@@ -43,7 +43,7 @@ Module {
 
     cpp.includePaths: {
         if (!pkgConfigProbe.found)
-            return includeProbe.filePath
+            return includeProbe.path
     }
     cpp.dynamicLibraries: {
         if (!pkgConfigProbe.found)
