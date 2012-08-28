@@ -5,11 +5,13 @@ Project {
     CppApplication {
         name: "labs"
         files: "main.cpp"
-//	Depends { name: "hunspell" }
+        Depends { name: "hunspell" }
         Depends { name: "zlib" }
         Depends { name: "qca" }
         Depends { name: "otr" }
-        //Depends { name: "kio" } bug
         Depends { name: "qt.core" }
+        Depends { name: "kde.io" }
+        Depends { name: "kde.notifyconfig" }
+        Depends { name: "kde.utils" }
     }
 }

@@ -1,4 +1,5 @@
 import qbs.base 1.0
+import qbs.fileinfo 1.0 as FileInfo
 import "../imports/probes" as Probes
 
 Module {
@@ -28,11 +29,11 @@ Module {
     
     condition: { 
         print(pkgConfigProbe.found, libraryProbe.found, includeProbe.found);
-        if(!pkgConfigProbe.found && !(libraryProbe.found && includeProbe.found)) {
+        if (!pkgConfigProbe.found && !(libraryProbe.found && includeProbe.found)) {
             // FIXME: Add check for required library
-            throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
-        }
-        else
+            // throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
+            return false;
+        } else
             return true;
     }
 
@@ -42,8 +43,9 @@ Module {
     cpp.linkerFlags: pkgConfigProbe.libs
 
     cpp.includePaths: {
-        if (!pkgConfigProbe.found)
+        if (!pkgConfigProbe.found) {
             return includeProbe.path
+        }
     }
     cpp.dynamicLibraries: {
         if (!pkgConfigProbe.found)
