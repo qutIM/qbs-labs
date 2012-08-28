@@ -2,6 +2,11 @@ import qbs.base 1.0
 
 PathProbe {
     pathSuffixes: [ "lib64", "lib" ]
+    platformEnvironmentPaths: {
+        if (qbs.toolchain === 'msvc')
+            return [ "LIB" ];
+        return undefined;
+    }
 
     function convertName(name) {
         if (qbs.targetOS === "linux")

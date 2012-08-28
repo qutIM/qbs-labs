@@ -27,7 +27,7 @@ Module {
 
         condition: !pkgConfigProbe.found
         names: includeNames
-        pathSuffixes: ["include/" + includeSuffix]
+        pathSuffixes: ["include/" + includeSuffix, "include", includeSuffix]
     }
     
     condition: { 

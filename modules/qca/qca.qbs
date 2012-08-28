@@ -5,5 +5,6 @@ import "../CommonModule.qbs" as CommonModule
 CommonModule {
     pkgConfigName: "qca2"
     libraryNames: ["qca", "qca2"]
-    includeNames: ["QtCrypto"]
+    includeNames: ["qca.h"]
+    includeSuffix: "QtCrypto"
 }

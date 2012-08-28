@@ -1,8 +1,8 @@
 #include <QCoreApplication>
 #include <QtCrypto>
 #include <zlib.h>
-#include <libotr/auth.h>
 #ifdef Q_OS_LINUX
+#include <libotr/auth.h>
 #include <aspell.h>
 #include <hunspell/hunspell.hxx>
 #include <kio_export.h>
