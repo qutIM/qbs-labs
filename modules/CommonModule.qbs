@@ -3,9 +3,11 @@ import qbs.fileinfo 1.0 as FileInfo
 import "../imports/probes" as Probes
 
 Module {
-    property string pkgConfigName
+    property string pkgConfigName    
     property var libraryNames
     property var includeNames
+    property string includeSuffix: ""
+
     Depends { name: "cpp" }
 
     Probes.PkgConfigProbe {
@@ -25,6 +27,7 @@ Module {
 
         condition: !pkgConfigProbe.found
         names: includeNames
+        pathSuffixes: ["include/" + includeSuffix]
     }
     
     condition: { 

@@ -3,4 +3,5 @@ import "../KdeModule.qbs" as KdeModule
 
 KdeModule {
     kdeModuleName: "io"
+    kdeIncludeSuffixes: "kio"
 }

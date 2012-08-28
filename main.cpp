@@ -2,9 +2,9 @@
 #include <QtCrypto>
 #include <zlib.h>
 #include <libotr/auth.h>
-#include <hunspell/hunspell.hxx>
-#include <aspell.h>
 #ifdef Q_OS_LINUX
+#include <aspell.h>
+#include <hunspell/hunspell.hxx>
 #include <kio_export.h>
 #include <knotify_export.h>
 #endif
