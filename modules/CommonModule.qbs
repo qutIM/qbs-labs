@@ -27,6 +27,7 @@ Module {
     }
     
     condition: { 
+        print(pkgConfigProbe.found, libraryProbe.found, includeProbe.found);
         if(!pkgConfigProbe.found && !libraryProbe.found) {
             // FIXME: Add check for required library
             throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
