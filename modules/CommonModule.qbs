@@ -44,11 +44,13 @@ Module {
 
     cpp.includePaths: {
         if (!pkgConfigProbe.found) {
+            print("IncludeProbe: found " + includeProbe.path);
             return includeProbe.path
         }
     }
     cpp.dynamicLibraries: {
         if (!pkgConfigProbe.found)
+            print("LibraryProbe: found library " + libraryProbe.filePath);
             return libraryProbe.filePath
     }
 }

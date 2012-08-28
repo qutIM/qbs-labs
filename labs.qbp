@@ -6,6 +6,7 @@ Project {
         name: "labs"
         files: "main.cpp"
         Depends { name: "hunspell" }
+        Depends { name: "aspell" }
         Depends { name: "zlib" }
         Depends { name: "qca" }
         Depends { name: "otr" }

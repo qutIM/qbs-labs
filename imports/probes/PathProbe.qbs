@@ -21,7 +21,7 @@ Probe {
     }
     function checkPath(path, name) {
         var filePath = FileInfo.joinPaths(path, name);
-        print("Checking '" + path + '/' + name + "'");
+//        print("Checking '" + path + '/' + name + "'");
         if (File.exists(filePath)) {
             return {
                 path: path,
