@@ -11,8 +11,9 @@ Project {
         Depends { name: "qca" }
         Depends { name: "otr" }
         Depends { name: "qt.core" }
-        Depends { name: "kde.io" }
-        Depends { name: "kde.notifyconfig" }
-        Depends { name: "kde.utils" }
+        Depends { name: "idn" }
+//        Depends { name: "kde.io" }
+//        Depends { name: "kde.notifyconfig" }
+//        Depends { name: "kde.utils" }
     }
 }
