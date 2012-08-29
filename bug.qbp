@@ -1,0 +1,10 @@
+import qbs.base 1.0
+
+Project {
+    moduleSearchPaths: "modules"
+    CppApplication {
+        name: "bug"
+        files: "main.cpp"
+        Depends { name: "bugmodule" }
+    }
+}
