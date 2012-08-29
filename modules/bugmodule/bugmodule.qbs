@@ -3,8 +3,9 @@ import "../../imports/probes" as Probes
 
 Module {
     
-    property var someProp: getVariable()
-    property string executable: "uname"
+    property string someProp: getVariable()
+    property string someProp2: "just string"
+    property var executable: "uname"
 
     function getVariable() {
         var p = new Process();
@@ -27,7 +28,8 @@ Module {
         id: includeProbe
 
         platformPaths: {
-            print(someProp); // Bug condition #2
+            print(someProp2); // Works fine
+            print(someProp); // Bug condition #2 - "Undefined property 'someProp'" here!
             return;
         }
         names: [ "names" ]
