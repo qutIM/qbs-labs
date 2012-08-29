@@ -12,7 +12,7 @@ Module {
 
     property string kdeVersion: getKdeVariable("kde-version")
     property string kdePrefix: getKdeVariable("prefix")
-    property string kdeIncludePrefix: "/usr/include" //getKdeVariable("path", "include")
+    property string kdeIncludePrefix: getKdeVariable("path", "include"); 
     property string kdeLibPrefix: getKdeVariable("path", "lib")
 
     //internal
@@ -24,9 +24,10 @@ Module {
         var args = ["--" + key];
         if (arg)
             args.push(arg);
-        if (p.exec(kdeConfigExecutable, args) === 0) {
+        //if (p.exec(kdeConfigExecutable, args) === 0) {
+        if (p.exec("kde4-config", args) === 0) {
             var variable = p.readAll().trim();
-            //print ("Found kde variable " + key + "(" + arg + ")" + " - " + variable);
+            print ("Found kde variable " + key + "(" + arg + ")" + " - " + variable);
             return variable;
         }
     }
@@ -36,7 +37,7 @@ Module {
     Probes.LibraryProbe {
         id: libraryProbe
 
-        //platformPaths: kdeLibPrefix
+        platformPaths: kdeLibPrefix
         names: kdeModuleName
     }
     Probes.IncludeProbe {
