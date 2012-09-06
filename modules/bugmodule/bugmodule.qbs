@@ -11,7 +11,7 @@ Module {
         var p = new Process();
           
         //if (p.exec("uname", [ "-a"] ) === 0) {  // Works anytime
-        if (p.exec(executable, [ "-a"] ) === 0) { // Bug condition #1
+        if (p.exec(this.executable, [ "-a"] ) === 0) { // Bug condition #1
             var variable = p.readAll().trim();
             return variable;
         }
