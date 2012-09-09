@@ -12,8 +12,8 @@ Module {
 
     property string kdeVersion: getKdeVariable("kde-version")
     property string kdePrefix: getKdeVariable("prefix")
-    property string kdeIncludePrefix: "/usr/include" //getKdeVariable("path", "include")
-    property string kdeLibPrefix: getKdeVariable("path", "lib")
+    property string kdeIncludePrefix: getKdeVariable("path", "include")
+    property string kdeLibPrefix: getKdeVariable("path", "lib").split(qbs.pathListSeparator)
 
     //internal
     property string kdeConfigExecutable: "kde4-config"
@@ -24,9 +24,9 @@ Module {
         var args = ["--" + key];
         if (arg)
             args.push(arg);
-        if (p.exec(kdeConfigExecutable, args) === 0) {
+        if (p.exec(this.kdeConfigExecutable, args) === 0) {
             var variable = p.readAll().trim();
-            //print ("Found kde variable " + key + "(" + arg + ")" + " - " + variable);
+            //print ("Found kde variable " + key + " - " + variable);
             return variable;
         }
     }
@@ -36,9 +36,10 @@ Module {
     Probes.LibraryProbe {
         id: libraryProbe
 
-        //platformPaths: kdeLibPrefix
-        names: kdeModuleName
+        platformPaths: kdeLibPrefix
+        names: kdeModuleNameInternal
     }
+    
     Probes.IncludeProbe {
         id: includeProbe
 
@@ -47,10 +48,15 @@ Module {
         pathSuffixes: kdeIncludeSuffixes
     }
 
-    cpp.includePaths: {
-        return includeProbe.path
-    }
-    cpp.dynamicLibraries: {
-        return libraryProbe.filePath
+    Properties {
+        condition: libraryProbe.found && includeProbe.found
+        cpp.dynamicLibraries: {
+            print ("KdeLibrary: found " + libraryProbe.filePath);
+            return libraryProbe.filePath;
+        }
+        cpp.includePaths: {
+            print ("KdeInclude: found " + includeProbe.path);
+            return includeProbe.path;
+        }   
     }
 }

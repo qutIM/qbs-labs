@@ -55,6 +55,7 @@ Module {
         cpp.frameworkPaths: frameworkProbe.path
         cpp.includePaths: FileInfo.joinPaths(frameworkProbe.filePath, "Headers")
     }
+    
     Properties {
         condition: pkgConfigProbe.found
 
@@ -63,6 +64,7 @@ Module {
         cpp.objcFlags: pkgConfigProbe.cflags
         cpp.linkerFlags: pkgConfigProbe.libs
     }
+    
     Properties {
         condition: libraryProbe.found && includeProbe.found
 
