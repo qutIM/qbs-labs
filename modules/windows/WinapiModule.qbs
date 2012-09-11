@@ -16,8 +16,12 @@ Module {
         condition: libraryProbe.found
 
         cpp.dynamicLibraries: {
-            print("LibraryProbe: found library " + libraryProbe.filePath);
-            return libraryProbe.filePath;
+            if (libraryProbe.filePath /*libraryProbe.found*/) {
+                print("WinapiModule: found library " + libraryProbe.filePath);
+                return libraryProbe.filePath;
+            } else {
+                print("WinapiModule: could not found library " + libraryNames);
+            }
         }
     }
 }

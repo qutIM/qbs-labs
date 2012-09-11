@@ -55,6 +55,7 @@ Module {
         cpp.frameworkPaths: frameworkProbe.path
         cpp.includePaths: FileInfo.joinPaths(frameworkProbe.filePath, "Headers")
     }
+    
     Properties {
         condition: pkgConfigProbe.found
 
@@ -63,16 +64,25 @@ Module {
         cpp.objcFlags: pkgConfigProbe.cflags
         cpp.linkerFlags: pkgConfigProbe.libs
     }
+    
     Properties {
         condition: libraryProbe.found && includeProbe.found
 
         cpp.includePaths: {
-            print("IncludeProbe: found " + includeProbe.path);
-            return includeProbe.path
+            if (includeProbe.filePath /*includeProbe.found*/) {
+                print("IncludeProbe: found " + includeProbe.path);
+                return includeProbe.path;
+            } else {
+                print("IncludeProbe: could not found include path for " + includeNames + " [" + includeSuffix + "]");
+            }
         }
         cpp.dynamicLibraries: {
-            print("LibraryProbe: found library " + libraryProbe.filePath);
-            return libraryProbe.filePath
+            if (libraryProbe.filePath /*libraryProbe.found*/) {
+                print("LibraryProbe: found library " + libraryProbe.filePath);
+                return libraryProbe.filePath;
+            } else {
+                print("LibraryProbe: could not found library " + libraryNames);
+            }
         }
     }
 }
