@@ -33,6 +33,7 @@ Module {
 
     Depends { name: "cpp" }
     cpp.includePaths: [ kdeIncludePrefix + "/KDE" ]
+    cpp.dynamicLibraries: [ kdeLibPrefix + "/kdecore.so" ]
 
     Probes.LibraryProbe {
         id: libraryProbe
@@ -53,7 +54,7 @@ Module {
         condition: libraryProbe.found && includeProbe.found
         cpp.dynamicLibraries: {
             print ("KdeLibrary: found " + libraryProbe.filePath);
-            return libraryProbe.filePath;
+            return outer.concat(libraryProbe.filePath);
         }
         cpp.includePaths: {
             print ("KdeInclude: found " + includeProbe.path);
