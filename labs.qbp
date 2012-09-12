@@ -8,11 +8,11 @@ Project {
         Depends { name: "hunspell" }
         Depends { name: "aspell" }
         Depends { name: "zlib" }
-        Depends { name: "qca" }
+        Depends { name: "qca"; required: true }
         Depends { name: "otr" }
         Depends { name: "qt.core" }
-        Depends { name: "idn" }
-        Depends { name: "dbusmenu-qt" }
+//        Depends { name: "idn" }
+//        Depends { name: "dbusmenu-qt" }
         Depends { name: "kde.io" }
         Depends { name: "kde.notifyconfig" }
         Depends { name: "kde.utils" }

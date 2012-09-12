@@ -6,7 +6,7 @@
 #include <aspell.h>
 #include <hunspell/hunspell.hxx>
 #include <kio_export.h>
-#include <knotify_export.h>
+#include <KGlobal>
 #endif
 
 int main(int argc, char **argv)

@@ -32,6 +32,7 @@ Module {
     }
 
     Depends { name: "cpp" }
+    cpp.includePaths: [ kdeIncludePrefix + "/KDE" ]
 
     Probes.LibraryProbe {
         id: libraryProbe
@@ -56,7 +57,7 @@ Module {
         }
         cpp.includePaths: {
             print ("KdeInclude: found " + includeProbe.path);
-            return includeProbe.path;
+            return outer.concat(includeProbe.path);
         }   
     }
 }
