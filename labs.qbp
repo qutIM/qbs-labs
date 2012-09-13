@@ -19,5 +19,6 @@ Project {
         Depends { name: "kde.io" }
         Depends { name: "kde.notifyconfig" }
         Depends { name: "kde.utils" }
+        Depends { name: "sdl.mixer" }
     }
 }
