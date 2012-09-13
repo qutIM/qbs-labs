@@ -2,6 +2,5 @@ import qbs.base 1.0
 import "../KdeModule.qbs" as KdeModule
 
 KdeModule {
-    kdeModuleName: "core"
-    kdeLibInfix: "kde"
+    kdeModuleName: "knotifyconfig"
 }

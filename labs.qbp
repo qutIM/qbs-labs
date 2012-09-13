@@ -16,9 +16,11 @@ Project {
         Depends { name: "dbusmenu.glib" }
         Depends { name: "dbusmenu.gtk2" }
         Depends { name: "dbusmenu.gtk3" }
-        Depends { name: "kde.io" }
-        Depends { name: "kde.notifyconfig" }
-        Depends { name: "kde.utils" }
+        Depends { name: "kde.kio" }
+        Depends { name: "kde.knotifyconfig" }
+        Depends { name: "kde.kutils" }
+        Depends { name: "kde.core" }
+        Depends { name: "kde.ui" }
         Depends { name: "sdl.mixer" }
     }
 }

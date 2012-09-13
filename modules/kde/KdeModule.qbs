@@ -4,11 +4,13 @@ import "Utils.js" as Utils
 
 Module {
     property string kdeModuleName
+    
+    property bool useIncludeProbe: false
     property var kdeIncludeSuffixes
-    property var kdeIncludeNames: [kdeModuleNameInternal + "_export.h"]
+    property var kdeIncludeNames: [ kdeModuleName + "_export.h" ]
 
-    property string kdeLibInfix: "k"
-    property string repository
+//    property string kdeLibInfix: "k"
+//    property string repository
 
     property string kdeVersion: getKdeVariable("kde-version")
     property string kdePrefix: getKdeVariable("prefix")
@@ -17,7 +19,7 @@ Module {
 
     //internal
     property string kdeConfigExecutable: "kde4-config"
-    property string kdeModuleNameInternal: kdeLibInfix + kdeModuleName
+//    property string kdeModuleNameInternal: kdeModuleName
 
     function getKdeVariable(key, arg) {
         var p = new Process();
@@ -32,16 +34,20 @@ Module {
     }
 
     Depends { name: "cpp" }
-    cpp.includePaths: [ kdeIncludePrefix + "/KDE" ]
+    cpp.includePaths: [
+        kdeIncludePrefix,
+        kdeIncludePrefix + "/KDE"
+    ]
 
     Probes.LibraryProbe {
         id: libraryProbe
 
         platformPaths: kdeLibPrefix
-        names: kdeModuleNameInternal
+        names: kdeModuleName
     }
     
     Probes.IncludeProbe {
+        condition: useIncludeProbe
         id: includeProbe
 
         platformPaths: kdeIncludePrefix
@@ -50,11 +56,15 @@ Module {
     }
 
     Properties {
-        condition: libraryProbe.found && includeProbe.found
+        condition: libraryProbe.found
         cpp.dynamicLibraries: {
             print ("KdeLibrary: found " + libraryProbe.filePath);
             return libraryProbe.filePath;
         }
+    }
+
+    Properties {
+        condition: useIncludeProbe && includeProbe.found
         cpp.includePaths: {
             print ("KdeInclude: found " + includeProbe.path);
             return outer.concat(includeProbe.path);
