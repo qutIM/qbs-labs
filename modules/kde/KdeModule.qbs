@@ -33,6 +33,7 @@ Module {
             //print ("Found kde variable " + key + " - " + variable);
             return variable;
         }
+        return '';
     }
 
     Depends { name: "cpp" }
