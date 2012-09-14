@@ -3,6 +3,7 @@ import "../../imports/probes" as Probes
 import "Utils.js" as Utils
 
 Module {
+    condition: kdeConfigExecutable !== undefined
     property string kdeModuleName
     
     property bool useIncludeProbe: false
@@ -18,8 +19,9 @@ Module {
     property string kdeLibPrefix: getKdeVariable("path", "lib").split(qbs.pathListSeparator)
 
     //internal
-    property string kdeConfigExecutable: "kde4-config"
-//    property string kdeModuleNameInternal: kdeModuleName
+    property string kdeConfigExecutable: qbs.targetOS === 'linux' ? "kde4-config" : undefined
+    //property string kdeConfigExecutableName: "kde4-config"
+    //property string kdeModuleNameInternal: kdeModuleName
 
     function getKdeVariable(key, arg) {
         var p = new Process();
@@ -47,13 +49,18 @@ Module {
     }
     
     Probes.IncludeProbe {
-        condition: useIncludeProbe
         id: includeProbe
 
+        condition: useIncludeProbe
         platformPaths: kdeIncludePrefix
         names: kdeIncludeNames
         pathSuffixes: kdeIncludeSuffixes
     }
+
+    //Probes.BinaryProbe {
+    //    id: kdeExecutableProbe
+    //    names: kdeConfigExecutableName
+    //}
 
     Properties {
         condition: libraryProbe.found
@@ -70,4 +77,11 @@ Module {
             return outer.concat(includeProbe.path);
         }   
     }
+
+    // Doesn't work
+    //Properties {
+    //    condition: kdeExecutableProbe.found
+
+    //    kdeConfigExecutable: kdeExecutableProbe.filePath
+    //}
 }
