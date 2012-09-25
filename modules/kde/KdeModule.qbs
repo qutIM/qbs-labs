@@ -58,11 +58,6 @@ Module {
         pathSuffixes: kdeIncludeSuffixes
     }
 
-    //Probes.BinaryProbe {
-    //    id: kdeExecutableProbe
-    //    names: kdeConfigExecutableName
-    //}
-
     Properties {
         condition: libraryProbe.found
         cpp.dynamicLibraries: {
@@ -76,13 +71,6 @@ Module {
         cpp.includePaths: {
             print ("KdeInclude: found " + includeProbe.path);
             return outer.concat(includeProbe.path);
-        }   
+        }
     }
-
-    // Doesn't work
-    //Properties {
-    //    condition: kdeExecutableProbe.found
-
-    //    kdeConfigExecutable: kdeExecutableProbe.filePath
-    //}
 }
