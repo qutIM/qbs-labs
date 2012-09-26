@@ -31,6 +31,9 @@ Probe {
         found = false;
         cflags = undefined;
         libraryPaths = undefined;
+        dynamicLibraries = undefined;
+        includePaths = undefined;
+        linkerFlags = undefined;
 
         var p = new Process();
         var args = [ name ];
@@ -64,24 +67,5 @@ Probe {
             print("PkgConfigProbe: found library " + name);
             found = true;
         }
-
-        //if (p.exec(executable, args.concat([ '--cflags' ])) === 0) {
-        //    cflags = p.readAll().trim();
-        //    if (cflags === "")
-        //        cflags = undefined;
-        //    else
-        //        cflags = cflags.split(/\s/);
-        //    if (p.exec(executable, args.concat([ '--libs' ])) === 0) {
-        //        libs = p.readAll().trim();
-        //        if (libs === "")
-        //            libs = undefined;
-        //        else
-        //            libs = libs.split(/\s/);
-        //        found = true;
-        //        print("PkgConfigProbe: found library " + name);
-        //        return;
-        //    }
-        //}
-
     }
 }

@@ -59,15 +59,15 @@ Module {
     Properties {
         condition: pkgConfigProbe.found
 
-        cpp.cxxFlags: pkgConfigProbe.cflags
-        cpp.objcFlags: pkgConfigProbe.cflags
-
         cpp.includePaths: pkgConfigProbe.includePaths
         cpp.libraryPaths: pkgConfigProbe.libraryPaths
         cpp.dynamicLibraries: pkgConfigProbe.dynamicLibraries
 
+        //cpp.cxxFlags: pkgConfigProbe.cflags
+        //cpp.objcFlags: pkgConfigProbe.cflags
         //cpp.cFlags: pkgConfigProbe.cflags
-        //cpp.linkerFlags: pkgConfigProbe.linkerFlags
+
+        cpp.linkerFlags: pkgConfigProbe.linkerFlags
     }
     
     Properties {
