@@ -26,13 +26,13 @@ Module {
     Probes.LibraryProbe {
         id: libraryProbe
 
-        condition: !pkgConfigProbe.found
+        condition: !pkgConfigProbe.found && libraryNames !== undefined
         names: libraryNames
     }
     Probes.IncludeProbe {
         id: includeProbe
 
-        condition: !pkgConfigProbe.found
+        condition: !pkgConfigProbe.found && includeNames !== undefined
         names: includeNames
         pathSuffixes: ["include/" + includeSuffix, "include", includeSuffix]
     }
