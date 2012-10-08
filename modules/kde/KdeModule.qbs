@@ -27,7 +27,7 @@ Module {
         condition: useIncludeProbe
         names: kdeIncludeNames
         pathSuffixes: kdeIncludeSuffixes
-        platformPaths: kde.core.incPath
+        platformPaths: [kde.core.incPath]
     }
 
     Properties {

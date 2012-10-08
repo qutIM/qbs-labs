@@ -1,17 +1,15 @@
 import qbs.base 1.0
 
 Module {
-    property paths libPaths: kdeConfigProbe.libPaths
-    property string incPath: kdeConfigProbe.incPath
+    property paths libPaths //: "/usr/lib"
+    property string incPath //: "/usr/include"
 
     //internal
     property string kdeConfigExecutable: "kde4-config"
 
     Probe {
         id: kdeConfigProbe
-
-        property paths libPaths
-        property string incPath
+        condition: false //i need probe variables dependencies
 
         function getKdeVariable(key, arg) {
             var p = new Process();
@@ -27,8 +25,8 @@ Module {
         }
 
         configure: {
-            incPath = getKdeVariable("path", "include");
-            libPaths = getKdeVariable("path", "lib").split(qbs.pathListSeparator);
+            qbs.modules.kde.core.incPath = getKdeVariable("path", "include");
+            qbs.modules.kde.core.libPaths = getKdeVariable("path", "lib").split(qbs.pathListSeparator);
         }
 
     }
@@ -46,5 +44,7 @@ Module {
         // Not really a setup in this case. Just some sanity checks.
         if (!incPath)
             throw "kde.core.incPath not set.";
+        if (!libPaths)
+            throw "kde.core.libPaths not set."
     }
 }
