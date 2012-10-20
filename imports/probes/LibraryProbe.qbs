@@ -3,9 +3,7 @@ import qbs.base 1.0
 PathProbe {
     pathSuffixes: [ "lib64", "lib" ]
     platformEnvironmentPaths: {
-        if (qbs.toolchain === 'msvc')
-            return [ "LIB" ];
-        return undefined;
+        return "LIB";
     }
 
     function convertName(name) {
@@ -14,7 +12,10 @@ PathProbe {
         else if (qbs.targetOS === "mac")
             return "lib" + name + ".dylib";
         else if (qbs.targetOS === "windows")
-            return name + ".lib";
+            if (qbs.toolchain === "mingw")
+                return "lib" + name + ".a";
+            else
+                return name + ".lib";
         else
             return name;
     }
