@@ -1,14 +1,17 @@
 // helper functions for the Qt modules
 
-function getLibraryName(qtModule, versionMajor, targetOS, debugInfo)
+function getLibraryName(qtModule, qtcore, qbs)
 {
-    var libName
-    if (targetOS === 'linux' || targetOS === 'mac') {
-        libName = qtModule
-    } else if (targetOS === 'windows') {
-        libName = qtModule + (debugInfo ? 'd' : '') + versionMajor
+    var libName = "Qt";
+    if (qtcore.versionMajor >= 5 && !qtcore.frameworkBuild)
+        libName += qtcore.versionMajor;
+    libName += qtModule;
+    if (qbs.targetOS === 'windows') {
+        libName += (qbs.enableDebugCode ? 'd' : '');
+        if (qtcore.versionMajor < 5)
+            libName += qtcore.versionMajor;
         if (qbs.toolchain !== "mingw")
-            libName += '.lib'
+            libName += '.lib';
     }
-    return libName
+    return libName;
 }
