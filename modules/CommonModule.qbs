@@ -71,7 +71,7 @@ Module {
     }
     
     Properties {
-        condition: libraryProbe.found && includeProbe.found
+        condition: !pkgConfigProbe.found //libraryProbe.found && includeProbe.found
 
         cpp.includePaths: {
             if (includeProbe.filePath /*includeProbe.found*/) {
