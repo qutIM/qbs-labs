@@ -51,7 +51,13 @@ Module {
     Properties {
         condition: frameworkProbe.found
 
-        cpp.frameworks: frameworkName
+        cpp.frameworks: {
+            if (frameworkProbe.found) {
+                print("FrameworkProbe: found " + frameworkName);
+                return frameworkName;
+            }
+            return base;
+        }
         cpp.frameworkPaths: frameworkProbe.path
         cpp.includePaths: FileInfo.joinPaths(frameworkProbe.filePath, "Headers")
     }
@@ -71,7 +77,7 @@ Module {
     }
     
     Properties {
-        condition: !pkgConfigProbe.found //libraryProbe.found && includeProbe.found
+        condition: !pkgConfigProbe.found && libraryProbe.found && includeProbe.found
 
         cpp.includePaths: {
             if (includeProbe.filePath /*includeProbe.found*/) {
@@ -80,6 +86,7 @@ Module {
             } else {
                 print("IncludeProbe: could not found include path for " + includeNames + " [" + includeSuffix + "]");
             }
+            return base;
         }
         cpp.dynamicLibraries: {
             if (libraryProbe.filePath /*libraryProbe.found*/) {
@@ -88,6 +95,7 @@ Module {
             } else {
                 print("LibraryProbe: could not found library " + libraryNames);
             }
+            return base;
         }
     }
 }
