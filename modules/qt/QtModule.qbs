@@ -1,10 +1,8 @@
-import qbs.base 1.0
-import qbs.fileinfo 1.0 as FileInfo
+import qbs 1.0
+import qbs.fileinfo as FileInfo
 import 'qtfunctions.js' as QtFunctions
 
 Module {
-    condition: false
-
     Depends { name: "cpp" }
     Depends { name: "Qt.core" }
 
