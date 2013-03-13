@@ -1,35 +1,19 @@
-import qbs.base 1.0
+import qbs 1.0
 import qbs.fileinfo as FileInfo
 import "utils.js" as Utils
 
 Probe {
     // Inputs
     property var names
-    property paths pathPrefixes
+    property pathList pathPrefixes
     property var pathSuffixes
-    property paths platformPaths: [ '/usr', '/usr/local' ]
+    property pathList platformPaths: [ '/usr', '/usr/local' ]
     property var environmentPaths
     property var platformEnvironmentPaths
 
     // Output
     property string path
     property string filePath
-
-    // Overrides
-    function convertName(name) {
-       return name;
-    }
-    function checkPath(path, name) {
-        var filePath = FileInfo.joinPaths(path, name);
-//        print("Checking '" + path + '/' + name + "'");
-        if (File.exists(filePath)) {
-            return {
-                path: path,
-                filePath: filePath
-            };
-        }
-        return undefined;
-    }
 
     configure: {
         if (!names)
@@ -46,14 +30,13 @@ Probe {
         }
         var _suffixes = Utils.concatAll('', pathSuffixes);
         for (i = 0; i < _names.length; ++i) {
-            var name = convertName(_names[i]);
             for (var j = 0; j < _paths.length; ++j) {
                 for (var k = 0; k < _suffixes.length; ++k) {
-                    var result = checkPath(FileInfo.joinPaths(_paths[j], _suffixes[k]), name);
-                    if (result !== undefined) {
+                    var fileName = FileInfo.joinPaths(_paths[j], _suffixes[k], _names[i]);
+                    if (File.exists(fileName)) {
                         found = true;
-                        path = result.path;
-                        filePath = result.filePath;
+                        path = FileInfo.joinPaths(_paths[j], _suffixes[k]);
+                        filePath = fileName;
                         return;
                     }
                 }
@@ -61,6 +44,5 @@ Probe {
         }
         found = false;
         path = undefined;
-        filePath = undefined;
     }
 }

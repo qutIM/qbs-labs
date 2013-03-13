@@ -19,20 +19,14 @@ Module {
     }
     Probes.PkgConfigProbe {
         id: pkgConfigProbe
-
-        condition: !frameworkProbe.found && pkgConfigName !== undefined
         name: pkgConfigName
     }
     Probes.LibraryProbe {
         id: libraryProbe
-
-        condition: !pkgConfigProbe.found && libraryNames !== undefined
         names: libraryNames
     }
     Probes.IncludeProbe {
         id: includeProbe
-
-        condition: !pkgConfigProbe.found && includeNames !== undefined
         names: includeNames
         pathSuffixes: ["include/" + includeSuffix, "include", includeSuffix]
     }

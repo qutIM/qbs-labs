@@ -1,8 +1,10 @@
-import qbs.base 1.0
+import qbs 1.0
 
 PathProbe {
     pathSuffixes: [ "include" ]
     platformEnvironmentPaths: {
-        return [ "INCLUDE" ];
+        if (qbs.toolchain === 'msvc')
+            return [ "INCLUDE" ];
+        return undefined;
     }
 }
