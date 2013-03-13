@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import qbs.fileinfo 1.0 as FileInfo
+import qbs.fileinfo as FileInfo
 import "../imports/probes" as Probes
 
 Module {
@@ -37,17 +37,6 @@ Module {
         pathSuffixes: ["include/" + includeSuffix, "include", includeSuffix]
     }
     
-    condition: {
-        if (!frameworkProbe.found
-                && !pkgConfigProbe.found
-                && !(libraryProbe.found && includeProbe.found)) {
-            // FIXME: Add check for required library
-            // throw "CommonModule: library " + pkgConfigName + " not found. Aborting";
-            return false;
-        } else
-            return true;
-    }
-
     Properties {
         condition: frameworkProbe.found
 

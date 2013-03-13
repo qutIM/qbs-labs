@@ -7,30 +7,6 @@ Module {
     //internal
     property string kdeConfigExecutable: "kde4-config"
 
-    Probe {
-        id: kdeConfigProbe
-        condition: false //i need probe variables dependencies
-
-        function getKdeVariable(key, arg) {
-            var p = new Process();
-            var args = ["--" + key];
-            if (arg)
-                args.push(arg);
-            if (p.exec(kdeConfigExecutable, args) === 0) {
-                var variable = p.readAll().trim();
-                print ("Found kde variable " + key + " - " + variable);
-                return variable;
-            }
-            return '';
-        }
-
-        configure: {
-            qbs.modules.kde.core.incPath = getKdeVariable("path", "include");
-            qbs.modules.kde.core.libPaths = getKdeVariable("path", "lib").split(qbs.pathListSeparator);
-        }
-
-    }
-
     Depends { name: "cpp" }
 
     cpp.libraryPaths: libPaths

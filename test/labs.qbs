@@ -2,7 +2,7 @@ import qbs.base 1.0
 import qbs.fileinfo as FileInfo
 
 Project {
-    moduleSearchPaths: "modules"
+    moduleSearchPaths: "../modules"
     CppApplication {
         name: "labs"
         files: "main.cpp"

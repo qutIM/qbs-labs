@@ -17,17 +17,16 @@ Probe {
     property paths includePaths
     property var linkerFlags
 
-    //internal
-    function splitPaths(paths, separator) {
-        if (paths === '')
-            return undefined;
-        paths = paths.slice(separator.length);
-        return paths.split(' ' + separator);
-    }
-
     configure: {
         if (!name)
             throw '"name" must be specified';
+		
+		var splitPaths =  function(paths, separator) {
+			if (paths === '')
+			return undefined;
+			paths = paths.slice(separator.length);
+			return paths.split(' ' + separator);
+		};
 
         var p = new Process();
         var args = [ name ];
